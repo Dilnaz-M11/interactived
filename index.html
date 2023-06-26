@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Интерактивные таблицы</title>
+ </head>
+ <body>  
+  <table width="100%" border="1" cellspacing="0" cellpadding="4">
+   <caption>Таблица 3.2. Планеты солнечной системы</caption>  
+   <tr> 
+    <th>&nbsp;</th><th>ЗМЮВ</th>
+    <th>МВЮЗ</th><th>ЮЗВМ</th><th>ВМЗЮ</th>
+   </tr>
+   <tr> 
+    <td>Планеты</td>
+	<td><span class="dynamic"><img src="zemlya.png"><img src="mars.png"><img src="upiter.png"><img src="venera.png"></span></td>
+	<td><span class="dynamic"><img src="mars.png"><img src="venera.png"><img src="upiter.png"><img src="zemlya.png"></span></td>
+	<td><span class="dynamic"><img src="upiter.png"><img src="zemlya.png"><img src="venera.png"><img src="mars.png"></span></td>
+	<td><span class="dynamic"><img src="venera.png"><img src="mars.png"><img src="zemlya.png"><img src="upiter.png"></span></td>
+   </tr>
+      <tr> 
+    <td>Планеты</td>
+	<td><span class="dynamic"><img src="zemlya.png"><img src="mars.png"><img src="upiter.png"><img src="venera.png"></span></td>
+	<td><span class="dynamic"><img src="mars.png"><img src="venera.png"><img src="upiter.png"><img src="zemlya.png"></span></td>
+	<td><span class="dynamic"><img src="upiter.png"><img src="zemlya.png"><img src="venera.png"><img src="mars.png"></span></td>
+	<td><span class="dynamic"><img src="venera.png"><img src="mars.png"><img src="zemlya.png"><img src="upiter.png"></span></td>
+   </tr>
+      <tr> 
+    <td>Планеты</td>
+	<td><span class="dynamic"><img src="zemlya.png"><img src="mars.png"><img src="upiter.png"><img src="venera.png"></span></td>
+	<td><span class="dynamic"><img src="mars.png"><img src="venera.png"><img src="upiter.png"><img src="zemlya.png"></span></td>
+	<td><span class="dynamic"><img src="upiter.png"><img src="zemlya.png"><img src="venera.png"><img src="mars.png"></span></td>
+	<td><span class="dynamic"><img src="venera.png"><img src="mars.png"><img src="zemlya.png"><img src="upiter.png"></span></td>
+   </tr>
+  </table>
+ </body>
+</html>
+
+
+
+
+<script>
+
+var elems = document.getElementsByClassName("dynamic"),
+ trampInput = document.createElement("input");
+ istdselect = false;
+            trampInput.type = "text";
+            trampInput.style.width = "128px";
+            trampInput.addEventListener("blur", function() {
+				let innerText = trampInput.value;
+				innerText = innerText.replace( /М/gi, "<img src=\"mars.png\">" );
+				innerText = innerText.replace( /З/gi, "<img src=\"zemlya.png\">" );
+				innerText = innerText.replace( /В/gi, "<img src=\"venera.png\">" );					
+				innerText = innerText.replace( /Ю/gi, "<img src=\"upiter.png\">" );					
+				trampInput.parentNode.innerHTML = innerText;
+				istdselect = false;	
+			}
+            , false);
+for (var i=0; i<elems.length; i++) {
+    var el = elems[i];
+    el.addEventListener("click", function() {
+        if (istdselect) return;
+		istdselect = true;
+		let innerText = this.innerHTML;
+		innerText = innerText.replace( /<img src=\"mars.png\">/gi, "М" );
+		innerText = innerText.replace( /<img src=\"zemlya.png\">/gi, "З" );
+		innerText = innerText.replace( /<img src=\"venera.png\">/gi, "В" );		
+		innerText = innerText.replace( /<img src=\"upiter.png\">/gi, "Ю" );		
+        trampInput.value = innerText;
+        this.innerHTML = "";
+        this.appendChild(trampInput);
+        trampInput.focus();
+        trampInput.select()
+		}.bind(el), false);
+	};
+	
+</script>
